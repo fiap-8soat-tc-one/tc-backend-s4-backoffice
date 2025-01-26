@@ -19,14 +19,14 @@ services:
       timeout: 5s
       retries: 5
 
-  tc-backend:
+  tc-backoffice-backend:
     depends_on:
       postgres:
         condition: service_healthy
     #    image: jcmds/fiap-8soat-tc
     build:
       context: .
-    container_name: tc-backend
+    container_name: tc-backoffice-backend
     ports:
       - 8080:8080
     restart: always
