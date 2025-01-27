@@ -61,10 +61,10 @@ FROM openjdk:17-jdk-slim AS deploy
 WORKDIR /app
 
 # Copia o jar do build para o diretório de trabalho na etapa de deploy
-COPY --from=build /app/target/*.jar /app/tc-backend-api.jar
+COPY --from=build /app/target/*.jar /app/tc-backoffice-backend-api.jar
 
 # Define o comando de entrada
-ENTRYPOINT ["java", "-jar", "tc-backend-api.jar"]
+ENTRYPOINT ["java", "-jar", "tc-backoffice-backend-api.jar"]
 
 ```
 

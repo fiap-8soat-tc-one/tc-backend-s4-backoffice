@@ -68,7 +68,7 @@ public class CustomerController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved customer", response = CustomerResponse.class),
     })
-    @GetMapping(path = URLMapping.ROOT_PUBLIC_API_CUSTOMERS + "/{document}")
+    @GetMapping(path = URLMapping.ROOT_PRIVATE_API_CUSTOMERS + "/{document}")
     public ResponseEntity<CustomerResponse> get(
             @ApiParam(value = "Document of the customer to be retrieved", required = true) @PathVariable String document) {
         return ok(CUSTOMER_MAPPER.fromDomain(loadCustomerUseCase.load(document)));
