@@ -23,7 +23,7 @@ spring:
   profiles:
     active: local
   application:
-    name: tc-backend-api
+    name: tc-backoffice-backend-api
 
   datasource:
     url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:postgres}
@@ -33,7 +33,7 @@ spring:
     hikari:
       minimum-idle: 2
       maximum-pool-size: 10
-      pool-name: TcBackendApiPool
+      pool-name: TcBackofficeBackendApiPool
       idle-timeout: 9000
       #isolate-internal-queries: true
       connection-test-query: SELECT 1

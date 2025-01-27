@@ -26,7 +26,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @Profile({"local", "dev", "hmg"})
 public class SwaggerConfig {
 
-    private static final String TITLE = "Tech Challenge Backend APIs";
+    private static final String TITLE = "Tech Challenge Backoffice Backend APIs";
     private static final String VERSION = "1.0";
 
     @Bean

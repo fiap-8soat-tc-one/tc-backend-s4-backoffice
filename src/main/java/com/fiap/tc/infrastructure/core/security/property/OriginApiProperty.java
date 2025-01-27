@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "tc-backend-api")
+@ConfigurationProperties(prefix = "tc-backoffice-backend-api")
 @Data
 public class OriginApiProperty {
 
