@@ -7,14 +7,12 @@ server:
   session:
     persistent: false # performance
     store-dir: /var/log/app # performance
-
 # Pool Connection and Postgres settings
 spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: false
     date-format: yyyy-MM-dd
-  
   mvc:
     format:
       date: yyyy-MM-dd
@@ -24,7 +22,6 @@ spring:
     active: local
   application:
     name: tc-backoffice-backend-api
-
   datasource:
     url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:postgres}
     username: ${DATABASE_USER:postgres}
@@ -38,7 +35,6 @@ spring:
       #isolate-internal-queries: true
       connection-test-query: SELECT 1
       connection-timeout: 18000
-  
   jpa:
     properties:
       hibernate:
@@ -47,9 +43,6 @@ spring:
         format_sql: true
         enable_lazy_load_no_trans: true
     open-in-view: false
-
-
-
 app:
   cache.user.token: true
   mvc.async.request-timeout: 10000
@@ -57,6 +50,15 @@ app:
     corePoolSize: 20
     maxPoolSize: 300
     queueCapacity: 600
+  auth.backoffice:
+    tokenExpiration: 85000
+  rest.client.oauth:
+    retry: 3
+    timeout: 5
+    endpoint: ${OAUTH_APP_HOST:http://localhost:8081}
+    clientId: dGNfY2xpZW50OnRlY2hfY2hhbGxlbmdlX2FwcA==
+    userName: ${AUTH_USER_ID:tc-backoffice-user-app}
+    password: ${AUTH_USER_PASSWORD:12345678}
   client:
     name: tc_client
     secret: $2a$12$aNBFov6o75DX51iVqd5mM.Z5S.Wi7xHMS3OzcU5386TWRi28Y691W
@@ -71,4 +73,3 @@ app:
   jwt:
     secret: "e0b41325-42e5-4b3a-b995-b05c4e77c56d"
     expirationTimeInMillis: 3600000    
-

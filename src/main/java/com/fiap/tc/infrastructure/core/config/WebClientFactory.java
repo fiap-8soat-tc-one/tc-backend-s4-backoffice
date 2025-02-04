@@ -18,24 +18,10 @@ import reactor.core.publisher.Mono;
 public class WebClientFactory {
 
     private final String oauthBaseUrl;
-    private final String backofficeBaseUrl;
 
-    public WebClientFactory(@Value("${app.rest.client.oauth.endpoint}") String oauthBaseUrl,
-                            @Value("${app.rest.client.backoffice.endpoint}") String backofficeBaseUrl) {
+    public WebClientFactory(@Value("${app.rest.client.oauth.endpoint}") String oauthBaseUrl) {
 
         this.oauthBaseUrl = oauthBaseUrl;
-        this.backofficeBaseUrl = backofficeBaseUrl;
-    }
-
-    @Bean
-    public WebClient webClientBackoffice(WebClient.Builder builder) {
-        return builder
-                .baseUrl(backofficeBaseUrl)
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .filter(logRequest())
-                .filter(logResponse())
-                .build();
-
     }
 
     @Bean
