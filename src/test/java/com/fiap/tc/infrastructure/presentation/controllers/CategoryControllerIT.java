@@ -1,0 +1,63 @@
+package com.fiap.tc.infrastructure.presentation.controllers;
+
+//
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fiap.tc.infrastructure.presentation.requests.CategoryRequest;
+import com.fiap.tc.infrastructure.presentation.response.CategoryResponse;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
+
+import static com.fiap.tc.util.TestUtils.readResourceFileAsString;
+import static java.lang.String.format;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+@ExtendWith(MockitoExtension.class)
+public class CategoryControllerIT {
+
+    private static final String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJteWxsZXIiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwicHJvZmlsZSI6IkFETUlOSVNUUkFUT1IiLCJuYW1lIjoiTXlsbGVyIFNha2FndWNoaSIsImV4cCI6MTczODYyOTAxMSwidXVpZCI6IjM0ODQ4ZTIwLTk2NzktMTFlYi05ZTEzLTAyNDJhYzExMDAwMiIsImF1dGhvcml0aWVzIjpbIkRFTEVURV9DVVNUT01FUlMiLCJSRUdJU1RFUl9PUkRFUlMiLCJMSVNUX1VTRVJTIiwiU0VBUkNIX09SREVSUyIsIkVESVRfT1JERVJTIiwiU0VBUkNIX1BST0RVQ1RTIiwiRURJVF9VU0VSUyIsIkRFTEVURV9QUk9EVUNUUyIsIkRFTEVURV9PUkRFUlMiLCJSRUdJU1RFUl9DVVNUT01FUlMiLCJERUxFVEVfVVNFUlMiLCJMSVNUX1BST0RVQ1RTIiwiU0VBUkNIX0NBVEVHT1JJRVMiLCJMSVNUX0NBVEVHT1JJRVMiLCJMSVNUX0NVU1RPTUVSUyIsIlVQREFURV9TVEFUVVNfT1JERVJTIiwiTElTVF9PUkRFUlMiLCJFRElUX0NVU1RPTUVSUyIsIlJFR0lTVEVSX1VTRVJTIiwiU0VBUkNIX0NVU1RPTUVSUyIsIkVESVRfQ0FURUdPUklFUyIsIlJFR0lTVEVSX0NBVEVHT1JJRVMiLCJQUk9DRVNTX1BBWU1FTlRTIiwiREVMRVRFX0NBVEVHT1JJRVMiLCJSRUdJU1RFUl9QUk9EVUNUUyIsIkVESVRfUFJPRFVDVFMiLCJTRUFSQ0hfVVNFUlMiXSwianRpIjoiOWY4OGFmYjYtZGZiOS00ZDFhLTlkNzktYWI5OTRkMjFhMWYxIiwiY2xpZW50X2lkIjoidGNfY2xpZW50In0.SvmqrIvLMEy-VKbPap8tBIvb_Nx2r8TrxiQEQeMSn8w";
+    private static final String CUSTOMER_TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4ODQwNDA3MTAzOSIsImlkIjoiM2ZhODVmNjQtNTcxNy00NTYyLWIzZmMtMmM5NjNmNjZhZmE2IiwibmFtZSI6Ik15bGxlciBTYWthZ3VjaGkiLCJlbWFpbCI6Im15bGxlcnNha2FndWNoaUBnbWFpbC5jb20iLCJkb2N1bWVudCI6Ijg4NDA0MDcxMDM5IiwiaWF0IjoxNzM4NTQyNjQ2LCJleHAiOjE3Mzg1NDYyNDZ9.rbAhpg7vWA9ZR4K5sNbv9FBMCVfmbdlfVBlcIYfzfRilOdcymljvnPt_zy6u1mLDDd1Uh3ZAIsJSYSJThfBlWw";
+
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Test
+    @Transactional
+    public void createCategoryTest() throws Exception {
+        createCategory();
+    }
+
+    private CategoryResponse createCategory() throws Exception {
+        String responseJson = mockMvc.perform(post("/api/private/v1/categories")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(readResourceFileAsString(CategoryRequest.class, "create_category.json"))
+                        .header("Authorization", getBackofficeTokenTest()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.name").exists())
+                .andExpect(jsonPath("$.description").exists())
+                .andReturn().getResponse().getContentAsString();
+
+
+        return objectMapper.readValue(responseJson, CategoryResponse.class);
+    }
+
+    private Object getBackofficeTokenTest() {
+        return format("Bearer %s", TOKEN);
+    }
+}
