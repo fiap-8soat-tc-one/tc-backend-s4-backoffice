@@ -251,6 +251,8 @@
                     <includes>
                         <include>com/fiap/tc/application/usecases/**/*</include>
                         <include>com/fiap/tc/infrastructure/gateways/**</include>
+                        <include>com/fiap/tc/infrastructure/services/**</include>
+                        <include>com/fiap/tc/infrastructure/persistence/repositories/**</include>
                     </includes>
                     <excludes>
                         <exclude>com/fiap/tc/infrastructure/gateways/validators/upload/ProductImageValidatorWrapper*</exclude>
