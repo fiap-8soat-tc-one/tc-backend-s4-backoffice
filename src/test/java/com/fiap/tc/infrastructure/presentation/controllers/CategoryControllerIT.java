@@ -1,7 +1,5 @@
 package com.fiap.tc.infrastructure.presentation.controllers;
 
-//
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.tc.infrastructure.presentation.requests.CategoryRequest;
 import com.fiap.tc.infrastructure.presentation.response.CategoryResponse;
@@ -54,6 +52,66 @@ public class CategoryControllerIT {
 
 
         return objectMapper.readValue(responseJson, CategoryResponse.class);
+    }
+
+    @Test
+    @Transactional
+    public void listCategoriesTest() throws Exception {
+        var category = createCategory();
+
+        mockMvc.perform(get("/api/private/v1/categories")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", getBackofficeTokenTest()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.total_elements").exists())
+                .andExpect(jsonPath("$.total_pages").exists())
+                .andExpect(jsonPath("$.content").exists())
+                .andExpect(jsonPath("$.content").isArray())
+                .andExpect(jsonPath("$.content..id").exists())
+                .andExpect(jsonPath("$.content..name").exists())
+                .andExpect(jsonPath("$.content..description").exists());
+    }
+
+    @Test
+    @Transactional
+    public void updateCategoryTest() throws Exception {
+        var category = createCategory();
+
+        mockMvc.perform(put("/api/private/v1/categories/{id}", category.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(readResourceFileAsString(CategoryRequest.class, "update_category.json"))
+                        .header("Authorization", getBackofficeTokenTest()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.name").exists())
+                .andExpect(jsonPath("$.description").exists());
+
+        mockMvc.perform(get("/api/private/v1/categories/{id}", category.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", getBackofficeTokenTest()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(category.getId().toString()))
+                .andExpect(jsonPath("$.name").value("Category 1 updated"))
+                .andExpect(jsonPath("$.description").value("Category 1 description updated"));
+    }
+
+    @Test
+    @Transactional
+    public void deleteCategoryTest() throws Exception {
+        var category = createCategory();
+
+        mockMvc.perform(delete("/api/private/v1/categories/{id}", category.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", getBackofficeTokenTest()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/private/v1/categories/{id}", category.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", getBackofficeTokenTest()))
+                .andExpect(status().isNotFound());
     }
 
     private Object getBackofficeTokenTest() {
