@@ -1,0 +1,6 @@
+{
+  "id_category": "{{categoryId}}",
+  "name": "Product 1",
+  "description": "Product 1 description",
+  "price": 100.0
+}
