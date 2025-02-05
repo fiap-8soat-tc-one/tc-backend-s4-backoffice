@@ -1,0 +1,10 @@
+{
+  "id_product": "{{productId}}",
+  "images": [
+      {
+        "name": "Imagem 1",
+        "image": "data:image/png;base64,image-base64-encoded",
+        "description": "Imagem do produto"
+      }
+  ]
+}

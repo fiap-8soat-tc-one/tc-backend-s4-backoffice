@@ -1,0 +1,6 @@
+{
+  "id_product": "{{productId}}",
+  "images": [
+     "{{imageId}}"
+  ]
+}
