@@ -19,22 +19,6 @@ public class CustomerTokenUtil {
     @Value("${app.jwt.secret}")
     private String secretKey;
 
-    @Value("${app.jwt.expirationTimeInMillis}")
-    private long oneHourTtlExpirationInMillis;
-
-    public String generateToken(Customer customer) {
-        return Jwts.builder()
-                .setSubject(customer.getDocument())
-                .claim("id", customer.getId())
-                .claim("name", customer.getName())
-                .claim("email", customer.getEmail())
-                .claim("document", customer.getDocument())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + oneHourTtlExpirationInMillis))
-                .signWith(SignatureAlgorithm.HS512, secretKey)
-                .compact();
-    }
-
     public Jws<Claims> validateToken(String token) {
         try {
             return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
@@ -46,5 +30,10 @@ public class CustomerTokenUtil {
     public String getCustomerIdFromToken(String token) {
         Claims claims = validateToken(token).getBody();
         return claims.get("id", String.class);
+    }
+
+    public String getDocumentFromToken(String token) {
+        Claims claims = validateToken(token).getBody();
+        return claims.get("document", String.class);
     }
 }

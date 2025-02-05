@@ -109,6 +109,7 @@ public class ProductGateway implements ProductGatewaySpec {
     }
 
     private Product updateProduct(Product product, ProductEntity productEntity, CategoryEntity categoryEntity) {
+        productEntity.setName(product.getName());
         productEntity.setDescription(product.getDescription());
         productEntity.setCategory(categoryEntity);
         productEntity.setPrice(product.getPrice());
