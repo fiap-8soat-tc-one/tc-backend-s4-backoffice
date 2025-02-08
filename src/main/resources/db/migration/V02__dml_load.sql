@@ -31,3 +31,7 @@ INSERT INTO product(id_category, uuid, name, description, price, register_date)
 VALUES (4, '7b3c010c-9f03-4a56-8c85-b519a5f6b86e', 'Milk Flan', 'Milk Flan 100g', 12.75, now());
 INSERT INTO product(id_category, uuid, name, description, price, register_date)
 VALUES (4, 'f6d7f266-33d9-42aa-a2ee-63d2e08f5176', 'Cake', 'Chocolate Cake Slice 100g', 13.45, now());
+
+--insert customer
+INSERT INTO customer(uuid, name, document, email, register_date)
+VALUES ('3fa85f64-5717-4562-b3fc-2c963f66afa6', 'Myller Sakaguchi', '88404071039', 'myllersakaguchi@gmail.com', now());
