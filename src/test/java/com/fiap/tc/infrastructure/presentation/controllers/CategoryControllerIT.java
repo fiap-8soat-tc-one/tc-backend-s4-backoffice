@@ -41,7 +41,7 @@ public class CategoryControllerIT {
     public CategoryResponse createCategory() throws Exception {
         String responseJson = mockMvc.perform(post("/api/private/v1/categories")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readResourceFileAsString(CategoryRequest.class, "create_category.json"))
+                        .content(readResourceFileAsString("requests/create_category.json"))
                         .header("Authorization", getBackofficeTokenTest()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -80,7 +80,7 @@ public class CategoryControllerIT {
 
         mockMvc.perform(put("/api/private/v1/categories/{id}", category.getId())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readResourceFileAsString(CategoryRequest.class, "update_category.json"))
+                        .content(readResourceFileAsString("requests/update_category.json"))
                         .header("Authorization", getBackofficeTokenTest()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

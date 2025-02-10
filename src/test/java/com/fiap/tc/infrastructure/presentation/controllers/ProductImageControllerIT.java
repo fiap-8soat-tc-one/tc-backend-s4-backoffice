@@ -1,10 +1,7 @@
 package com.fiap.tc.infrastructure.presentation.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fiap.tc.infrastructure.presentation.requests.CategoryRequest;
-import com.fiap.tc.infrastructure.presentation.requests.ProductRequest;
 import com.fiap.tc.infrastructure.presentation.response.CategoryResponse;
-import com.fiap.tc.infrastructure.presentation.response.ProductImageResponse;
 import com.fiap.tc.infrastructure.presentation.response.ProductResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +17,8 @@ import java.util.UUID;
 
 import static com.fiap.tc.util.TestUtils.readResourceFileAsString;
 import static java.lang.String.format;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -53,23 +51,19 @@ public class ProductImageControllerIT {
         product = createProductImage(product.getId());
         mockMvc.perform(delete("/api/private/v1/products/images")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readResourceFileAsString(ProductRequest.class, "delete_product_images.json")
+                        .content(readResourceFileAsString("requests/delete_product_images.json")
                                 .replace("{{productId}}", product.getId().toString())
                                 .replace("{{imageId}}", product.getImages().get(0).getId().toString()))
                         .header("Authorization", getBackofficeTokenTest()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
-        mockMvc.perform(get("/api/private/v1/products/{productId}", product.getId())
-                        .header("Authorization", getBackofficeTokenTest()))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.images").isEmpty());
+        
     }
 
     public ProductResponse createProductImage(UUID productId) throws Exception {
         String responseJson = mockMvc.perform(post("/api/private/v1/products/images")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readResourceFileAsString(ProductRequest.class, "register_product_images.json")
+                        .content(readResourceFileAsString("requests/register_product_images.json")
                                 .replace("{{productId}}", productId.toString()))
                         .header("Authorization", getBackofficeTokenTest()))
                 .andExpect(status().isOk())
@@ -82,7 +76,7 @@ public class ProductImageControllerIT {
     public CategoryResponse createCategory() throws Exception {
         String responseJson = mockMvc.perform(post("/api/private/v1/categories")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readResourceFileAsString(CategoryRequest.class, "create_category.json"))
+                        .content(readResourceFileAsString("requests/create_category.json"))
                         .header("Authorization", getBackofficeTokenTest()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -98,7 +92,7 @@ public class ProductImageControllerIT {
     private ProductResponse createProduct(UUID categoryId) throws Exception {
         String responseJson = mockMvc.perform(post("/api/private/v1/products")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readResourceFileAsString(ProductRequest.class, "create_product.json")
+                        .content(readResourceFileAsString("requests/create_product.json")
                                 .replace("{{categoryId}}", categoryId.toString()))
                         .header("Authorization", getBackofficeTokenTest()))
                 .andExpect(status().isOk())

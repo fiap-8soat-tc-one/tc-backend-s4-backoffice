@@ -38,7 +38,7 @@
     </properties>
 
     <dependencies>
-        
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -121,21 +121,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectreactor</groupId>
-            <artifactId>reactor-spring</artifactId>
-            <version>${spring-reactor.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
@@ -197,24 +182,6 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>${google.zxing.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>javase</artifactId>
-            <version>${google.zxing.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.sqids</groupId>
-            <artifactId>sqids</artifactId>
-            <version>${sqids.version}</version>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -255,7 +222,8 @@
                         <include>com/fiap/tc/infrastructure/persistence/repositories/**</include>
                     </includes>
                     <excludes>
-                        <exclude>com/fiap/tc/infrastructure/gateways/validators/upload/ProductImageValidatorWrapper*</exclude>
+                        <exclude>com/fiap/tc/infrastructure/gateways/validators/upload/ProductImageValidatorWrapper*
+                        </exclude>
                         <exclude>com/fiap/tc/infrastructure/gateways/mappers/**/*</exclude>
                     </excludes>
                 </configuration>
