@@ -39,3 +39,5 @@ Este microsserviço tem como responsabilidade de gerenciar todo backoffice do ec
 
 
 ## Documentação do banco de dados Microserviço Backoffice
+
+[Clique Aqui para ser redirecionado](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/blob/e9a89cc0977e659301f31b4c5b105d0aeada97ec/docs/README.md)
