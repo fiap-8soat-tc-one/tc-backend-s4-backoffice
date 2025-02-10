@@ -57,7 +57,7 @@ app:
     timeout: 5
     endpoint: ${OAUTH_APP_HOST:http://localhost:8081}
     clientId: dGNfY2xpZW50OnRlY2hfY2hhbGxlbmdlX2FwcA==
-    userName: ${AUTH_USER_ID:tc-backoffice-user-app}
+    userName: ${AUTH_USER_ID:myller}
     password: ${AUTH_USER_PASSWORD:12345678}
   client:
     name: tc_client
@@ -71,5 +71,5 @@ app:
       maxLength: 1024000
       maxProductImages: 5
   jwt:
-    secret: "e0b41325-42e5-4b3a-b995-b05c4e77c56d"
+    secret: e0b41325-42e5-4b3a-b995-b05c4e77c56d
     expirationTimeInMillis: 3600000    

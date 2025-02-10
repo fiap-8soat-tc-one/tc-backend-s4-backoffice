@@ -1,8 +1,6 @@
 package com.fiap.tc.infrastructure.presentation.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fiap.tc.infrastructure.presentation.requests.CategoryRequest;
-import com.fiap.tc.infrastructure.presentation.requests.ProductRequest;
 import com.fiap.tc.infrastructure.presentation.response.CategoryResponse;
 import com.fiap.tc.infrastructure.presentation.response.ProductResponse;
 import org.junit.jupiter.api.Test;
