@@ -1,7 +1,6 @@
 package com.fiap.tc.infrastructure.presentation.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fiap.tc.infrastructure.presentation.requests.CustomerRequest;
 import com.fiap.tc.infrastructure.presentation.response.CustomerResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,7 +39,7 @@ public class CustomerControllerIT {
     private CustomerResponse createCustomer() throws Exception {
         String responseJson = mockMvc.perform(put("/api/public/v1/customers")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readResourceFileAsString(CustomerRequest.class, "create_customer.json"))
+                        .content(readResourceFileAsString("requests/create_customer.json"))
                         .header("X-Authorization-Token", CUSTOMER_TOKEN))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

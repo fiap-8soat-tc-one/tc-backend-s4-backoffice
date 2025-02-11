@@ -1,8 +1,6 @@
 package com.fiap.tc.infrastructure.presentation.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fiap.tc.infrastructure.presentation.requests.CategoryRequest;
-import com.fiap.tc.infrastructure.presentation.requests.ProductRequest;
 import com.fiap.tc.infrastructure.presentation.response.CategoryResponse;
 import com.fiap.tc.infrastructure.presentation.response.ProductResponse;
 import org.junit.jupiter.api.Test;
@@ -46,7 +44,7 @@ public class ProductControllerIT {
     private ProductResponse createProduct(UUID categoryId) throws Exception {
         String responseJson = mockMvc.perform(post("/api/private/v1/products")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readResourceFileAsString(ProductRequest.class, "create_product.json")
+                        .content(readResourceFileAsString("requests/create_product.json")
                                 .replace("{{categoryId}}", categoryId.toString()))
                         .header("Authorization", getBackofficeTokenTest()))
                 .andExpect(status().isOk())
@@ -92,7 +90,7 @@ public class ProductControllerIT {
 
         mockMvc.perform(put("/api/private/v1/products/{id}", product.getId())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readResourceFileAsString(ProductRequest.class, "update_product.json")
+                        .content(readResourceFileAsString("requests/update_product.json")
                                 .replace("{{categoryId}}", category.getId().toString()))
                         .header("Authorization", getBackofficeTokenTest()))
                 .andExpect(status().isOk())
@@ -129,7 +127,7 @@ public class ProductControllerIT {
     public CategoryResponse createCategory() throws Exception {
         String responseJson = mockMvc.perform(post("/api/private/v1/categories")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readResourceFileAsString(CategoryRequest.class, "create_category.json"))
+                        .content(readResourceFileAsString("requests/create_category.json"))
                         .header("Authorization", getBackofficeTokenTest()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
