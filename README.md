@@ -1,7 +1,6 @@
 # Tech Challenge - Fase 4: Microsserviço de Backoffice
 
-[![CodeQL Advanced](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/codeql.yml/badge.svg)](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/codeql.yml) [![Publish Docker image](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/github-pipeline.yml/badge.svg)](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/github-pipeline.yml) [![Publish Docker image](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/github-pipeline.yml/badge.svg)](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/github-pipeline.yml)
-
+[![CodeQL Advanced](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/codeql.yml/badge.svg)](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/codeql.yml) [![Publish Docker image](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/github-pipeline.yml/badge.svg)](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/github-pipeline.yml) [![SonarQube Cloud](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/fiap-8soat-tc-one/tc-backend-s4-backoffice/actions/workflows/sonarcloud.yml)
 ## Responsabilidade :triangular_flag_on_post:
 
 Este microsserviço tem como responsabilidade de gerenciar todo backoffice do ecossistema da lanchonete, criação dos itens, gestão de estoque, cadastro dos lanches.
